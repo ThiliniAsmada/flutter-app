@@ -67,7 +67,12 @@ class _LoginPageState extends State<LoginPage> {
     if (_email.text == "admin" && _password.text == "admin") {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => AdminMain()));
-    } else {
+    }
+    else if (_email.text == "user" && _password.text == "user") {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    } 
+    else {
       var response = await http.post(apiUrl + '/login',
           body: data, encoding: Encoding.getByName("application/json"));
       print("------------------------");
@@ -182,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                       context,
                       new MaterialPageRoute(
                           builder: (context) => HomePage()));
-                  // loginFunc(context);
+                  loginFunc(context);
                   print("login");
                 },
               ),
@@ -202,6 +207,7 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
+        
       ),
     );
   }

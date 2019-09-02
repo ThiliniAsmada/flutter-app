@@ -1,150 +1,156 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tt/Bloc/MenuBlocAdmin.dart';
+import 'package:tt/models/ModelAdmin.dart';
+import 'package:tt/utils/uidata.dart';
 
-class AdminMain extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _AdminMainState();
-}
 
-class _AdminMainState extends State<AdminMain> {
-  int _currentTabIndex = 0;
+class AdminMain extends StatelessWidget {
+  final _scaffoldState = GlobalKey<ScaffoldState>();
+  Size deviceSize;
+  BuildContext _context;
 
-  @override
-  Widget build(BuildContext context) {
-    final _kTabPages = <Widget>[
-      _inquiryList(),
-      reports(),
-      notification(),
-    ];
+  //menuStack
+  Widget menuStack(BuildContext context, MenuAdmin menu) => InkWell(
+        onTap: () {
+          _navigate(context, menu);
+          // _navigate(context, menu);
+        },
+        splashColor: Colors.orange,
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          elevation: 2.0,
+          child: Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              menuImage(menu),
+              menuColor(),
+              menuData(menu),
+            ],
+          ),
+        ),
+      );
 
-    final _kBottomNavBarItems = <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-          icon: Icon(Icons.not_interested), title: Text("Inquiries")),
-      BottomNavigationBarItem(icon: Icon(Icons.wifi), title: Text("Reports")),
-      BottomNavigationBarItem(
-          icon: Icon(Icons.notification_important),
-          title: Text("notification")),
-    ];
-    assert(_kTabPages.length == _kBottomNavBarItems.length);
-    final bottomNavBar = BottomNavigationBar(
-      items: _kBottomNavBarItems,
-      currentIndex: _currentTabIndex,
-      type: BottomNavigationBarType.fixed,
-      onTap: (int index) {
-        setState(() {
-          _currentTabIndex = index;
-        });
-      },
-    );
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Welcome Admin"),
-      ),
-      body: _kTabPages[_currentTabIndex],
-      bottomNavigationBar: bottomNavBar,
-    );
-  }
+  //stack 1/3
+  Widget menuImage(MenuAdmin menu) => Image.asset(
+        menu.image,
+        fit: BoxFit.cover,
+      );
 
-  inquiries() {
-    return Container(
-      child: Column(
+  //stack 2/3
+  Widget menuColor() => new Container(
+        decoration: BoxDecoration(boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            blurRadius: 1.0,
+          ),
+        ]),
+      );
+
+  //stack 3/3
+  Widget menuData(MenuAdmin menu) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          ListTile(
-            leading: Text("Guide name:"),
-            title: Text(
-              "Neo",
-              style: TextStyle(color: Colors.red),
-            ),
-            trailing: Text("4.5"),
+          SizedBox(
+            height: 60.0,
           ),
+          Icon(
+            menu.icon,
+            color: Colors.teal,
+          ),
+          
+          Text(
+            menu.title,
+            style: TextStyle(
+               height: 3,color: Colors.orange, fontWeight: FontWeight.bold),
+          )
         ],
-      ),
-    );
-  }
+      );
 
-  reports() {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          ListTile(
-            leading: Text("Guide name:"),
-            title: Text(
-              "Neo",
-              style: TextStyle(color: Colors.red),
+  //appbar
+  Widget appBar() => SliverAppBar(
+        backgroundColor: Colors.teal.withOpacity(0.6),
+        pinned: true,
+        elevation: 10.0,
+        forceElevated: true,
+        expandedHeight: 150.0,
+        flexibleSpace: FlexibleSpaceBar(
+          centerTitle: false,
+          background: Container(
+            child: Padding(
+              padding: EdgeInsets.only(top: 10.0 ),
             ),
-            trailing: Text("4.5"),
-          ),
-        ],
-      ),
-    );
-  }
-
-  notification() {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Center(
-            child: Column(
-              children: <Widget>[
-                Text("This is notification"),
-              ],
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/appBarImage.jpg"),
+                fit: BoxFit.cover
+              )
             ),
           ),
-          ListTile(
-            leading: Text("Guide name:"),
-            title: Text(
-              "Neo",
-              style: TextStyle(color: Colors.red),
-            ),
-            trailing: Text("4.5"),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _inquiryList extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _inquiryListState();
-}
-
-class _inquiryListState extends State<_inquiryList> {
-  final _item = List<String>.generate(10, (i) => "Inquiry ${i + 1}");
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: _item.length,
-        itemBuilder: (context, index) {
-          final String item = _item[index];
-
-          return Dismissible(
-            key: Key(item),
-            onDismissed: (DismissDirection dir) {
-              Scaffold.of(context).showSnackBar(SnackBar(
-                content: Text(dir == DismissDirection.startToEnd
-                    ? '$item removed'
-                    : '$item marked'),
-                action: SnackBarAction(
-                    label: 'UNDO',
-                    onPressed: () {
-                      setState(() {
-                        this._item.insert(index, item);
-                      });
-                    }),
-              ));
-            },
-            background: Container(
-              color: Colors.red,
-              child: Icon(Icons.thumb_up),
-              alignment: Alignment.centerRight,
-            ),
-            child: ListTile(
-              title: Center(
-                child: Text('${_item[index]}'),
+          title: Row(
+            children: <Widget>[
+              FlutterLogo(
+                colors: Colors.yellow,
+                textColor: Colors.white,
               ),
-            ),
-          );
+              SizedBox(
+                width: 10.0,
+              ),
+              Text(UIData.appName)
+            ],
+          ),
+        ),
+      );
+
+  //bodygrid
+  Widget bodyGrid(List<MenuAdmin> menu) => SliverGrid(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount:
+              MediaQuery.of(_context).orientation == Orientation.portrait
+                  ? 2
+                  : 3,
+          mainAxisSpacing: 0.0,
+          crossAxisSpacing: 0.0,
+          childAspectRatio: 1.0,
+        ),
+        delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+          return menuStack(context, menu[index]);
+        }, childCount: menu.length),
+      );
+
+  Widget homeScaffold(BuildContext context) => Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Colors.transparent,
+        ),
+        child: Scaffold(key: _scaffoldState, body: bodySliverList()),
+      );
+
+  Widget bodySliverList() {
+    MenuBloc menuBloc = MenuBloc();
+    return StreamBuilder<List<MenuAdmin>>(
+        stream: menuBloc.menuItemsAdmin,
+        builder: (context, snapshot) {
+          return snapshot.hasData
+              ? CustomScrollView(
+                  slivers: <Widget>[
+                    appBar(),
+                    bodyGrid(snapshot.data),
+                  ],
+                )
+              : Center(child: CircularProgressIndicator());
         });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    _context = context;
+    deviceSize = MediaQuery.of(context).size;
+    return homeScaffold(context);
+  }
+
+  void _navigate(BuildContext context, MenuAdmin menu) {
+    // Navigator.pop(context);
+    Navigator.pushNamed(context, "${menu.items}");
+    print("${menu.items}");
   }
 }
