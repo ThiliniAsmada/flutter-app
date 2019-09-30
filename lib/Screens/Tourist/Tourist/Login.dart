@@ -10,6 +10,9 @@ import 'package:tt/Screens/Guide/GuideTimeline.dart';
 import 'package:tt/Screens/Tourist/Tourist/Payments.dart';
 import 'package:tt/Screens/Tourist/Tourist/Timeline.dart';
 import 'package:tt/Screens/Tourist/Tourist/TouristProfile.dart';
+import 'package:tt/Screens/Admin/AdminPaymentHistory.dart';
+import 'package:tt/Screens/Admin/GuideRequest.dart';
+import 'package:tt/Screens/Admin/ViewGuide.dart';
 import 'package:tt/utils/uidata.dart';
 
 import 'Chatroom.dart';
@@ -38,6 +41,10 @@ class Login extends StatelessWidget {
         UIData.GuideTimeline:(BuildContext context)=>GuideTimeline(),
         UIData.GuidePhotos:(BuildContext context)=>CarouselDemo(),
         UIData.GuidePaymentHistory:(BuildContext context)=>GuidePaymentHistory(),
+        UIData.AdminPaymentHistory: (BuildContext context) => AdminPaymentHistory(),
+        UIData.GuideRequest:(BuildContext context)=>GuideRequest(),
+        UIData.ViewGuide:(BuildContext context)=>ViewGuide(),
+        
 
       },
       title: 'Tourist 2 Townie',
@@ -207,7 +214,6 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
-        
       ),
     );
   }

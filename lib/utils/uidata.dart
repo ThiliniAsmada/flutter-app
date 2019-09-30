@@ -21,11 +21,12 @@ class UIData {
   static const String GuideTimeline = "GuideTimeline";
   static const String GuidePaymentHistory = "GuidePaymentHistory";
 
-  static const String HandleGuide= "HandleGuide";
-  static const String HandleTourist= "HandleTourist";
+  static const String ViewGuide= "ViewGuide";
+  static const String ViewTourist= "ViewTourist";
   static const String Inquiry = "Inquiry";
   static const String AdminPaymentHistory = "AdminPaymentHistory";
-
+  static const String Settings = "Settings";
+  static const String GuideRequest = "GuideRequest";
 
   
 
