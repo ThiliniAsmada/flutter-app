@@ -23,7 +23,7 @@ class UIData {
 
   static const String ViewGuide= "ViewGuide";
   static const String ViewTourist= "ViewTourist";
-  static const String Inquiry = "Inquiry";
+  static const String ViewInquiry = "ViewInquiry";
   static const String AdminPaymentHistory = "AdminPaymentHistory";
   static const String Settings = "Settings";
   static const String GuideRequest = "GuideRequest";

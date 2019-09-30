@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:tt/Screens/Admin/GuideProfile.dart';
+import 'package:tt/Screens/Admin/InquiryDetails.dart';
 
-class ViewGuide extends StatefulWidget {
+class ViewInquiry extends StatefulWidget {
   @override
-  _ViewGuideState createState() => _ViewGuideState();
+  _ViewInquiryState createState() => _ViewInquiryState();
 }
 
-class _ViewGuideState extends State<ViewGuide> {
+class _ViewInquiryState extends State<ViewInquiry> {
   
   Future<List> getData() async {
     final response= await http.get("http://10.0.2.2/public_html/getdata.php");
@@ -18,7 +18,7 @@ class _ViewGuideState extends State<ViewGuide> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text("View Guide"),),
+      appBar: new AppBar(title: new Text("Inquiries"),),
       body: new FutureBuilder<List>(
         future:getData(),
         builder: (context, snapshot){
@@ -47,7 +47,7 @@ class ItemList extends StatelessWidget {
           child: new GestureDetector(
             onTap: () => Navigator.of(context).push(
               new MaterialPageRoute(
-              builder: (BuildContext context) => new GuideProfileDetails(list: list, index: i,)
+              builder: (BuildContext context) => new InquiryDetails(list: list, index: i,)
               )
               ),
           

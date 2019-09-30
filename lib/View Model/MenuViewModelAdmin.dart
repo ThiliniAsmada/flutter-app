@@ -42,7 +42,7 @@ class MenuViewModelAdmin {
           menuColor: Color(0xffe19b6b),
           icon: Icons.photo,
           image: UIData.blankImage,
-          items:UIData.Inquiry
+          items:UIData.ViewInquiry
       ),
       MenuAdmin(
           title: "Payment History",
