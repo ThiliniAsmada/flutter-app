@@ -13,6 +13,7 @@ import 'package:tt/Screens/Tourist/Tourist/TouristProfile.dart';
 import 'package:tt/Screens/Admin/AdminPaymentHistory.dart';
 import 'package:tt/Screens/Admin/GuideRequest.dart';
 import 'package:tt/Screens/Admin/ViewGuide.dart';
+import 'package:tt/Screens/Admin/ViewTourist.dart';
 import 'package:tt/Screens/Admin/ViewInquiry.dart';
 import 'package:tt/utils/uidata.dart';
 
@@ -45,6 +46,7 @@ class Login extends StatelessWidget {
         UIData.AdminPaymentHistory: (BuildContext context) => AdminPaymentHistory(),
         UIData.GuideRequest:(BuildContext context)=>GuideRequest(),
         UIData.ViewGuide:(BuildContext context)=>ViewGuide(),
+        UIData.ViewTourist:(BuildContext context)=>ViewTourist(),
         UIData.ViewInquiry:(BuildContext context)=>ViewInquiry(),
 
         
