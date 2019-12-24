@@ -150,7 +150,7 @@ class _RegistrationState extends State<RegistrationPage> {
                 ),
                 onPressed: () {
                   register(context);
-                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePageGuide()));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>MainScreen()));
                 }),
           ),
         ),

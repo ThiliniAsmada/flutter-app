@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart' as prefix0;
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
 import 'package:tt/Chatroom/Chatroom.dart';
-import 'package:tt/Screens/Admin/AdminMain.dart';
+import 'package:tt/Screens/Admin/AdminMenu.dart';
 import 'package:tt/Screens/Guide/ConfirmRequest.dart';
 import 'package:tt/Screens/Guide/GuideFirst.dart';
 import 'package:tt/Screens/Guide/GuidePaymentHistory.dart';
@@ -74,8 +74,13 @@ class _LoginPageState extends State<LoginPage> {
 
     if (_email.text == "admin" && _password.text == "admin") {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => AdminMain()));
-    } else {
+          context, MaterialPageRoute(builder: (context) => AdminMenu()));
+    }
+    else if(_email.text == "user" && _password.text == "user"){
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => MainScreen()));
+    }
+     else {
       var response = await http.post(apiUrl + '/login',
           body: data, encoding: Encoding.getByName("application/json"));
 
@@ -195,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
               Text(
-                "Dont have account? Register here",
+                "Dont have account?  Register here",
                 style: TextStyle(fontSize: 15.0, color: Colors.white),
               ),
               RaisedButton(
